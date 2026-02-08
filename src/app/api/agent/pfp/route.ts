@@ -131,7 +131,7 @@ export async function POST(request: NextRequest) {
   
   // Generate PFP URL using traits as parameters
   // This calls our generator service (or could be inline SVG)
-  const pfpUrl = `https://agnt-psi.vercel.app/api/agent/pfp/render?` + 
+  const pfpUrl = `https://agnt-warren-integration.up.railway.app/api/agent/pfp/render?` + 
     `name=${encodeURIComponent(agent.name)}` +
     `&palette=${traits.palette}` +
     `&head=${traits.headShape}` +

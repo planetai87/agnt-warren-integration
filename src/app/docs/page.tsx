@@ -2,7 +2,7 @@ import Logo from "@/components/Logo";
 import Link from "next/link";
 
 export default function Docs() {
-  const baseUrl = "https://agnt-psi.vercel.app/api";
+  const baseUrl = "https://agnt-warren-integration.up.railway.app/api";
   
   return (
     <div className="min-h-screen bg-[#e8e8e8]">
