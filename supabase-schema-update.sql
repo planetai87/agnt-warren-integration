@@ -11,3 +11,7 @@ ALTER TABLE warren_deployments ADD COLUMN IF NOT EXISTS container_address TEXT;
 ALTER TABLE warren_deployments ADD COLUMN IF NOT EXISTS nft_address TEXT;
 ALTER TABLE warren_deployments ADD COLUMN IF NOT EXISTS nft_token_id TEXT;
 ALTER TABLE warren_deployments ADD COLUMN IF NOT EXISTS source_token_id TEXT;
+
+-- Container Gateway: Add warren_token_id and warren_url to agents table
+ALTER TABLE agents ADD COLUMN IF NOT EXISTS warren_token_id TEXT;
+ALTER TABLE agents ADD COLUMN IF NOT EXISTS warren_url TEXT;

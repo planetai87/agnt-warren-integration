@@ -1,0 +1,71 @@
+{
+  "abi": [
+    {
+      "type": "function",
+      "name": "getFile",
+      "inputs": [
+        { "name": "tokenId", "type": "uint256", "internalType": "uint256" },
+        { "name": "pathHash", "type": "bytes32", "internalType": "bytes32" }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "tuple",
+          "internalType": "struct WarrenContainer.FileEntry",
+          "components": [
+            { "name": "chunk", "type": "address", "internalType": "address" },
+            { "name": "size", "type": "uint32", "internalType": "uint32" },
+            { "name": "depth", "type": "uint8", "internalType": "uint8" }
+          ]
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "getFilePaths",
+      "inputs": [
+        { "name": "tokenId", "type": "uint256", "internalType": "uint256" }
+      ],
+      "outputs": [
+        { "name": "", "type": "bytes32[]", "internalType": "bytes32[]" }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "getPathString",
+      "inputs": [
+        { "name": "pathHash", "type": "bytes32", "internalType": "bytes32" }
+      ],
+      "outputs": [
+        { "name": "", "type": "string", "internalType": "string" }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "getSiteData",
+      "inputs": [
+        { "name": "tokenId", "type": "uint256", "internalType": "uint256" }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "tuple",
+          "internalType": "struct WarrenContainer.SiteData",
+          "components": [
+            { "name": "siteType", "type": "uint8", "internalType": "uint8" },
+            { "name": "creator", "type": "address", "internalType": "address" },
+            { "name": "version", "type": "uint32", "internalType": "uint32" },
+            { "name": "totalSize", "type": "uint32", "internalType": "uint32" },
+            { "name": "fileCount", "type": "uint16", "internalType": "uint16" },
+            { "name": "createdAt", "type": "uint40", "internalType": "uint40" },
+            { "name": "updatedAt", "type": "uint40", "internalType": "uint40" }
+          ]
+        }
+      ],
+      "stateMutability": "view"
+    }
+  ]
+}

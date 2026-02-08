@@ -55,10 +55,73 @@ export async function POST(request: NextRequest) {
         .insert({ agent_id: agent.id, name: skill })
     }
   }
+
+  // Warren deploy - generate and deploy on-chain profile page
+  let warrenUrl: string | null = null
+  let warrenTokenId: string | null = null
+
+  try {
+    // Import dynamically to avoid breaking if Warren env vars are not set
+    const { generateProfileHtml } = await import('@/lib/profile-html')
+    const { estimateWarrenFee, payWarrenRelayer, deploySiteToWarren, getWarrenWalletAddress } = await import('@/lib/warren-client')
+
+    const profileHtml = generateProfileHtml({
+      name,
+      slug,
+      bio: bio || null,
+      avatar_url: avatar_url || null,
+      creator: data.creator || 'unknown',
+      born: data.created_at || new Date().toISOString(),
+      skills: skills || [],
+      posts: [],
+      apps: [],
+      apis: [],
+    })
+
+    const senderAddress = getWarrenWalletAddress()
+    const fee = await estimateWarrenFee(Buffer.byteLength(profileHtml, 'utf-8'))
+    const payment = await payWarrenRelayer(fee.totalWei, fee.relayerAddress)
+    const deployment = await deploySiteToWarren(
+      profileHtml,
+      payment.txHash,
+      senderAddress,
+      senderAddress,
+      { name: `${name} - AGNT Profile`, siteType: 'site' }
+    )
+
+    warrenTokenId = deployment.tokenId
+    warrenUrl = deployment.url
+
+    // Update agent with Warren data
+    await supabaseAdmin
+      .from('agents')
+      .update({
+        warren_token_id: warrenTokenId,
+        warren_url: warrenUrl,
+      })
+      .eq('id', agent.id)
+
+    // Save deployment record
+    await supabaseAdmin
+      .from('warren_deployments')
+      .insert({
+        agent_id: agent.id,
+        token_id: warrenTokenId,
+        url: warrenUrl,
+        deploy_type: 'site',
+        size: deployment.size,
+        owner_address: senderAddress,
+      })
+
+  } catch (warrenError) {
+    console.error('[init] Warren deploy failed (non-fatal):', warrenError)
+    // Warren deploy failure is non-fatal - profile is already saved in Supabase
+  }
   
   return NextResponse.json({
     success: true,
     agent: data,
-    page: `/${slug}`
+    page: `/${slug}`,
+    warren_url: warrenUrl,
   })
 }
