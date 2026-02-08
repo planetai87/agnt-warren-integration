@@ -1,0 +1,236 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "/home/ubuntu/repos/agnt/contracts/AgentRegistry.sol": {
+      "lastModificationDate": 1770345826981,
+      "contentHash": "2c27e92186f6eb4c7d8a2caf6ba9e50d",
+      "sourceName": "contracts/AgentRegistry.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "AgentRegistry"
+      ]
+    },
+    "/home/ubuntu/repos/agnt/contracts/megaeth/assets/AgentAssets.sol": {
+      "lastModificationDate": 1770420359561,
+      "contentHash": "0275dd84fc45d43c4aca624a031c88e7",
+      "sourceName": "contracts/megaeth/assets/AgentAssets.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../core/AgentCore.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "AgentAssets"
+      ]
+    },
+    "/home/ubuntu/repos/agnt/contracts/megaeth/core/AgentCore.sol": {
+      "lastModificationDate": 1770420359562,
+      "contentHash": "a3234862adfd586731a83de90cdb549f",
+      "sourceName": "contracts/megaeth/core/AgentCore.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "AgentCore",
+        "IERC20"
+      ]
+    },
+    "/home/ubuntu/repos/agnt/contracts/megaeth/social/AgentSocial.sol": {
+      "lastModificationDate": 1770420359564,
+      "contentHash": "94db7323aa48a8923d1cdcb0204049ec",
+      "sourceName": "contracts/megaeth/social/AgentSocial.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../core/AgentCore.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "AgentSocial"
+      ]
+    },
+    "/home/ubuntu/repos/agnt/contracts/megaeth/core/AgentProfile.sol": {
+      "lastModificationDate": 1770420359564,
+      "contentHash": "c33a2fc5067f6f4f28fa66e19745e9e6",
+      "sourceName": "contracts/megaeth/core/AgentProfile.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./AgentCore.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "AgentProfile"
+      ]
+    },
+    "/home/ubuntu/repos/agnt/contracts/megaeth/content/AgentContent.sol": {
+      "lastModificationDate": 1770420359562,
+      "contentHash": "4fa71cce2733d11e684085945194bdb3",
+      "sourceName": "contracts/megaeth/content/AgentContent.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "viaIR": true,
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../core/AgentCore.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "AgentContent"
+      ]
+    }
+  }
+}

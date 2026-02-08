@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AGNT PFP Generator</title>
+  <style>
+    body { background: #111; color: #fff; font-family: monospace; padding: 20px; }
+    .grid { display: flex; flex-wrap: wrap; gap: 20px; }
+    .pfp { display: flex; flex-direction: column; align-items: center; }
+    canvas { image-rendering: pixelated; width: 256px; height: 256px; }
+    .label { margin-top: 8px; font-size: 12px; color: #888; }
+  </style>
+</head>
+<body>
+  <h1>AGNT PFP Concepts</h1>
+  <div class="grid" id="grid"></div>
+  
+  <script>
+    const SIZE = 32;
+    
+    const PALETTES = [
+      { bg: '#0a0a0a', primary: '#00ffff', secondary: '#ff00ff', accent: '#ffffff' },
+      { bg: '#0a0a0a', primary: '#ff00ff', secondary: '#00ff00', accent: '#ffff00' },
+      { bg: '#0a0a0a', primary: '#00ff00', secondary: '#00ffff', accent: '#ffffff' },
+      { bg: '#0a0a0a', primary: '#ff3333', secondary: '#ff00ff', accent: '#ffffff' },
+      { bg: '#0a0a0a', primary: '#ffffff', secondary: '#888888', accent: '#00ffff' },
+    ];
+    
+    function generatePFP(seed, name) {
+      const canvas = document.createElement('canvas');
+      canvas.width = SIZE;
+      canvas.height = SIZE;
+      const ctx = canvas.getContext('2d');
+      
+      // Seeded random
+      let s = seed;
+      const random = () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
+      
+      const palette = PALETTES[Math.floor(random() * PALETTES.length)];
+      
+      // Background with noise
+      ctx.fillStyle = palette.bg;
+      ctx.fillRect(0, 0, SIZE, SIZE);
+      
+      // Static noise
+      for (let i = 0; i < 80; i++) {
+        const x = Math.floor(random() * SIZE);
+        const y = Math.floor(random() * SIZE);
+        ctx.fillStyle = `rgba(255,255,255,${random() * 0.1})`;
+        ctx.fillRect(x, y, 1, 1);
+      }
+      
+      // Head shape (abstract)
+      const headType = Math.floor(random() * 3);
+      ctx.fillStyle = palette.primary;
+      
+      if (headType === 0) {
+        // Rounded
+        for (let y = 8; y < 26; y++) {
+          for (let x = 8; x < 24; x++) {
+            const dx = x - 16, dy = y - 16;
+            if (dx*dx + dy*dy < 64 + random() * 20) {
+              if (random() > 0.1) ctx.fillRect(x, y, 1, 1);
+            }
+          }
+        }
+      } else if (headType === 1) {
+        // Angular
+        ctx.fillRect(10, 8, 12, 18);
+        ctx.fillRect(8, 10, 16, 14);
+      } else {
+        // Skull-ish
+        ctx.fillRect(9, 7, 14, 12);
+        ctx.fillRect(11, 19, 10, 6);
+        ctx.fillRect(13, 25, 6, 3);
+      }
+      
+      // Eyes
+      const eyeStyle = Math.floor(random() * 4);
+      ctx.fillStyle = palette.secondary;
+      
+      if (eyeStyle === 0) {
+        // Dots
+        ctx.fillRect(12, 13, 2, 2);
+        ctx.fillRect(18, 13, 2, 2);
+      } else if (eyeStyle === 1) {
+        // Slits
+        ctx.fillRect(11, 14, 3, 1);
+        ctx.fillRect(18, 14, 3, 1);
+      } else if (eyeStyle === 2) {
+        // Hollow
+        ctx.fillStyle = palette.bg;
+        ctx.fillRect(11, 12, 3, 3);
+        ctx.fillRect(18, 12, 3, 3);
+        ctx.fillStyle = palette.secondary;
+        ctx.fillRect(12, 13, 1, 1);
+        ctx.fillRect(19, 13, 1, 1);
+      } else {
+        // Scanning line
+        ctx.fillRect(10, 14, 12, 1);
+      }
+      
+      // Glitch effect
+      const glitchIntensity = random();
+      if (glitchIntensity > 0.3) {
+        const imgData = ctx.getImageData(0, 0, SIZE, SIZE);
+        for (let i = 0; i < glitchIntensity * 5; i++) {
+          const y = Math.floor(random() * SIZE);
+          const shift = Math.floor((random() - 0.5) * 6);
+          for (let x = 0; x < SIZE; x++) {
+            const srcX = (x + shift + SIZE) % SIZE;
+            const srcIdx = (y * SIZE + srcX) * 4;
+            const dstIdx = (y * SIZE + x) * 4;
+            if (random() > 0.5) {
+              imgData.data[dstIdx] = imgData.data[srcIdx];
+              imgData.data[dstIdx + 1] = imgData.data[srcIdx + 1];
+              imgData.data[dstIdx + 2] = imgData.data[srcIdx + 2];
+            }
+          }
+        }
+        ctx.putImageData(imgData, 0, 0);
+      }
+      
+      // Scanlines
+      ctx.fillStyle = 'rgba(0,0,0,0.3)';
+      for (let y = 0; y < SIZE; y += 2) {
+        ctx.fillRect(0, y, SIZE, 1);
+      }
+      
+      // Accent glow
+      ctx.fillStyle = palette.accent;
+      ctx.globalAlpha = 0.5;
+      ctx.fillRect(Math.floor(random() * 20) + 6, Math.floor(random() * 10) + 20, 1, 1);
+      ctx.fillRect(Math.floor(random() * 20) + 6, Math.floor(random() * 10) + 20, 1, 1);
+      ctx.globalAlpha = 1;
+      
+      // AGNT mark (subtle)
+      if (random() > 0.5) {
+        ctx.fillStyle = 'rgba(255,255,255,0.2)';
+        ctx.beginPath();
+        ctx.arc(28, 28, 2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      
+      return canvas;
+    }
+    
+    // Generate samples
+    const samples = [
+      { seed: 0, name: 'Agent #0 - Ay' },
+      { seed: 42, name: 'Agent #1' },
+      { seed: 1337, name: 'Agent #2' },
+      { seed: 9999, name: 'Agent #3' },
+      { seed: 777, name: 'Agent #4' },
+      { seed: 2026, name: 'Agent #5' },
+    ];
+    
+    const grid = document.getElementById('grid');
+    samples.forEach(({ seed, name }) => {
+      const div = document.createElement('div');
+      div.className = 'pfp';
+      const canvas = generatePFP(seed, name);
+      div.appendChild(canvas);
+      const label = document.createElement('div');
+      label.className = 'label';
+      label.textContent = name;
+      div.appendChild(label);
+      grid.appendChild(div);
+    });
+  </script>
+</body>
+</html>

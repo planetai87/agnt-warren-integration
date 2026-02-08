@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Display';
+  src: local('Arial Black'), local('Helvetica Neue Bold'), local('sans-serif');
+  font-weight: 900;
+}
+
+:root {
+  --background: #e8e8e8;
+  --foreground: #1a1a1a;
+  --muted: #6b6b6b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Bold condensed headings - matches mockup aesthetic */
+.font-display {
+  font-family: 'Arial Black', 'Helvetica Neue', Impact, sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+/* Form inputs */
+input, textarea {
+  font-family: inherit;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #999;
+  text-transform: uppercase;
+}
+
+/* Remove default focus outline, add custom */
+input:focus, textarea:focus, button:focus {
+  outline: none;
+}
+
+/* Smooth transitions */
+a, button {
+  transition: opacity 0.15s ease;
+}
+
+/* Selection color */
+::selection {
+  background: #1a1a1a;
+  color: #e8e8e8;
+}
